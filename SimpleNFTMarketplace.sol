@@ -1,9 +1,10 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+
 
 contract SimpleNFTMarketplace is ERC721, Ownable {
     using SafeMath for uint256;
@@ -14,7 +15,7 @@ contract SimpleNFTMarketplace is ERC721, Ownable {
     event TokenListed(uint256 indexed tokenId, uint256 price);
     event TokenSold(uint256 indexed tokenId, uint256 price, address buyer);
 
-    constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) {}
+    constructor(string memory _name, string memory _symbol, address _initialOwner) ERC721(_name, _symbol) Ownable(_initialOwner) {}
 
     function listToken(uint256 _tokenId, uint256 _price) external {
         require(ownerOf(_tokenId) == msg.sender, "You do not own this token");
