@@ -1,0 +1,2 @@
+# MagmaProto
+Prototype Magma Protocol
